@@ -5,7 +5,7 @@ import socket
 
 pygame.mixer.init()
 
-noise = pygame.mixer.Sound(u"White_Noise.wav")
+noise = pygame.mixer.Sound(u"Buzz.wav")
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.bind(("127.0.0.1", 29999))
 
