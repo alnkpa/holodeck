@@ -4,7 +4,7 @@ import pygame.mixer
 import socket
 import os
 
-soundName = lambda s: os.path.join("data", s) + ".wav")
+soundName = lambda s: os.path.join("data", s) + ".wav"
 sound = lambda s: pygame.mixer.Sound(soundName(s))
 
 pygame.mixer.init()
@@ -16,8 +16,8 @@ noise = sound("Buzz")
 # Sounds generated with 
 #   say -r 0.7 '0--A' -o 0a.aiff
 #   ffmpeg -i 0a.aiff 0a.wav
-numbers = map(str, range(9)) + ["U"]
-letters = ['', 'a', 'b', 'c', 'd', 'e', 'f']
+numbers = map(str, range(9)) + ["u"]
+letters = [''] + list("abcdefgh")
 
 numbersounds = {k: sound(k) for k in (n+l for n in numbers for l in letters)}
 
@@ -39,6 +39,7 @@ while True:
 			bump.play()
 		elif data.startswith("Move"):
 			number = data.partition("Move")[2].strip().lower()
+			print number
 			numbersounds[number].play()
 		elif data.startswith("END"):
 			break
