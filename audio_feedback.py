@@ -24,12 +24,16 @@ letters = [''] + list("abcdefgh")
 numbersounds = {k: sound(k) for k in (n+l for n in numbers for l in letters)}
 
 channel = None
-def play(command, data):
+
+def queue(snd):
 	global channel
-	number = data.partition(command)[2].strip().lower()
 	while channel is not None and channel.get_busy():
 		pass
-	channel = numbersounds[number].play()
+	channel = snd.play()
+
+def play(command, data):
+	number = data.partition(command)[2].strip().lower()
+	queue(numbersounds[number])
 
 if __name__ == "__main__":
 	sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -45,7 +49,7 @@ if __name__ == "__main__":
 				noise.play(loops=-1)
 			elif data.startswith("Bump"):
 				play("Bump", data)
-				bump.play()
+				queue(bump)
 			elif data.startswith("Move"):
 				play("Move", data)
 			elif data.startswith("END"):
