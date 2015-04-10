@@ -18,7 +18,7 @@ noise = sound("Buzz")
 # Sounds generated with 
 #   say -r 0.7 '0--A' -o 0a.aiff
 #   ffmpeg -i 0a.aiff 0a.wav
-numbers = map(str, range(9)) + ["u"]
+numbers = map(str, range(10)) + ["u"]
 letters = [''] + list("abcdefgh")
 
 numbersounds = {k: sound(k) for k in (n+l for n in numbers for l in letters)}
